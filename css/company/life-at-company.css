@@ -1,0 +1,32 @@
+
+    .comp-hero {
+      background: var(--black);
+      padding: 200px 0 120px;
+      color: var(--white);
+      text-align: center;
+    }
+
+    .comp-hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 900;
+      margin-bottom: 24px;
+    }
+
+    .masonry {
+      column-count: 3;
+      column-gap: 24px;
+      padding: 100px 0;
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 24px;
+      background: var(--neutral-200);
+      border-radius: 0;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--neutral-600);
+    }
+  

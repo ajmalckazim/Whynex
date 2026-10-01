@@ -1,0 +1,36 @@
+
+    /* Disable hover-only opening and make the dropdown click controlled */
+    .header-inner .nav-item .mega-wrap {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    .header-inner .nav-item.menu-open>.mega-wrap {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
+    .header-inner .nav-item.menu-open>.nav-link svg {
+      transform: rotate(180deg);
+    }
+
+    .header-inner .nav-link.has-mega {
+      cursor: pointer;
+    }
+
+    .header-inner .mega-wrap .mega-item,
+    .header-inner .mega-wrap .btn {
+      pointer-events: auto;
+    }
+
+    @media (max-width: 991px) {
+      .header-inner .nav-item .mega-wrap {
+        position: static !important;
+        width: 100% !important;
+      }
+    }
+  

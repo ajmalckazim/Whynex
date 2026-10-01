@@ -1,0 +1,91 @@
+
+    .comp-hero {
+      background: var(--black);
+      padding: 200px 0 120px;
+      color: var(--white);
+      text-align: center;
+    }
+
+    .comp-hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 900;
+      margin-bottom: 24px;
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      padding: 100px 0;
+      align-items: start;
+    }
+
+    .contact-wrap .reveal {
+      min-width: 0;
+    }
+
+    .contact-wrap h2 {
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+      color: var(--black);
+    }
+
+    .contact-wrap form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .contact-wrap input,
+    .contact-wrap textarea,
+    .contact-wrap button {
+      font-size: 15px;
+    }
+
+    @media (max-width: 1024px) {
+      .comp-hero {
+        padding: 160px 0 90px;
+      }
+
+      .contact-wrap {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        padding: 80px 0 64px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .comp-hero {
+        padding: 140px 0 72px;
+      }
+
+      .comp-hero h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+        line-height: 1.1;
+      }
+
+      .contact-wrap {
+        gap: 28px;
+        padding: 60px 0 48px;
+      }
+
+      .contact-wrap .reveal:last-child {
+        margin-top: 12px;
+      }
+
+      .contact-wrap .reveal[style*="padding:40px"] {
+        padding: 24px 18px !important;
+      }
+
+      .contact-wrap form input,
+      .contact-wrap form textarea {
+        padding: 14px 12px !important;
+      }
+
+      .contact-wrap .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  
