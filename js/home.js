@@ -9,21 +9,32 @@
     /* ── Hamburger / mobile nav ── */
     const hamburger = document.getElementById('hamburger');
     const mobileNav = document.getElementById('mobile-nav');
+    hamburger.setAttribute('aria-controls', mobileNav.id);
+
+    function closeMobileNav() {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
     hamburger.addEventListener('click', () => {
       const isOpen = hamburger.classList.toggle('open');
       mobileNav.classList.toggle('open', isOpen);
-      hamburger.setAttribute('aria-expanded', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
     /* Close mobile nav when link clicked */
     mobileNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        mobileNav.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      });
+      link.addEventListener('click', closeMobileNav);
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && mobileNav.classList.contains('open')) {
+        closeMobileNav();
+        hamburger.focus();
+      }
     });
 
     /* ── Mobile accordion ── */
@@ -36,8 +47,12 @@
       const trigger = document.getElementById(triggerId);
       const content = document.getElementById(contentId);
       trigger.addEventListener('click', () => {
-        trigger.classList.toggle('open-acc');
-        content.classList.toggle('open');
+        const isOpen = trigger.getAttribute('aria-expanded') !== 'true';
+        trigger.classList.toggle('open-acc', isOpen);
+        trigger.setAttribute('aria-expanded', String(isOpen));
+        content.classList.toggle('open', isOpen);
+        content.setAttribute('aria-hidden', String(!isOpen));
+        content.inert = !isOpen;
       });
     });
 
@@ -174,7 +189,7 @@
         slider.style.transform = `translateX(-${offset}px)`;
         dots.forEach((d, i) => {
           d.classList.toggle('active', i === current);
-          d.setAttribute('aria-selected', i === current);
+          d.setAttribute('aria-pressed', String(i === current));
         });
       }
 
@@ -200,43 +215,6 @@
         isDragging = false;
         slider.classList.remove('grabbing');
       });
-
-      // Touch
-      let touchStartX = 0;
-      slider.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-      slider.addEventListener('touchend', e => {
-        const diff = touchStartX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
-      }, { passive: true });
-
-      window.addEventListener('resize', () => goTo(current), { passive: true });
-    })();
-
-    /* ── Testimonial Slider ── */
-    (function () {
-      const slider = document.getElementById('testi-slider');
-      const dots = document.querySelectorAll('.testi-dot');
-      if (!slider) return;
-
-      let current = 0;
-      const cards = slider.querySelectorAll('.testi-card');
-      const total = cards.length;
-
-      function getWidth() {
-        return cards[0].offsetWidth + 24;
-      }
-
-      function goTo(index) {
-        current = ((index % total) + total) % total;
-        slider.style.transform = `translateX(-${current * getWidth()}px)`;
-        dots.forEach((d, i) => d.classList.toggle('active', i === current));
-      }
-
-      dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
-
-      // Auto-advance
-      const autoplay = setInterval(() => goTo(current + 1), 5000);
-      slider.closest('section').addEventListener('mouseenter', () => clearInterval(autoplay));
 
       // Touch
       let touchStartX = 0;
@@ -307,8 +285,24 @@
         else msgGroup.classList.remove('invalid');
 
         if (valid) {
-          form.style.display = 'none';
+          const company = form.querySelector('#cf-company')?.value.trim();
+          const phone = form.querySelector('#cf-phone')?.value.trim();
+          const service = form.querySelector('#cf-service')?.selectedOptions[0]?.text;
+          const budget = form.querySelector('#cf-budget')?.selectedOptions[0]?.text;
+          const details = [
+            `Name: ${name.value.trim()}`,
+            `Email: ${email.value.trim()}`,
+            company && `Company: ${company}`,
+            phone && `Phone: ${phone}`,
+            service && service !== 'Select a service...' && `Service: ${service}`,
+            budget && budget !== 'Select a budget range...' && `Budget: ${budget}`,
+            `Project details: ${msg.value.trim()}`
+          ].filter(Boolean).join('\n');
+          const query = new URLSearchParams({ subject: 'WHYNEX website enquiry', body: details });
+          successMsg.querySelector('h3').textContent = 'Continue in your email app';
+          successMsg.querySelector('p').textContent = 'Your enquiry is ready to send. Send the message in your email app to reach WHYNEX.';
           successMsg.classList.add('show');
+          window.location.href = `mailto:whynexofficial@gmail.com?${query}`;
         }
       });
 
@@ -323,15 +317,13 @@
     /* ── Newsletter ── */
     function handleNewsletter(e) {
       e.preventDefault();
-      const input = e.target.querySelector('input');
-      const btn = e.target.querySelector('button');
-      btn.textContent = '✓ Subscribed';
-      btn.style.background = '#25D366';
-      input.value = '';
-      setTimeout(() => {
-        btn.textContent = 'Subscribe';
-        btn.style.background = '';
-      }, 3000);
+      const input = e.currentTarget.querySelector('input[type="email"]');
+      if (!input) return;
+      const query = new URLSearchParams({
+        subject: 'WHYNEX free marketing report request',
+        body: `Please send the free marketing report to ${input.value.trim()}.`
+      });
+      window.location.href = `mailto:whynexofficial@gmail.com?${query}`;
     }
 
     /* ── Active nav on scroll ── */
