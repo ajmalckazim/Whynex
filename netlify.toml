@@ -1,0 +1,8 @@
+[build]
+publish = "."
+
+[[redirects]]
+from = "/"
+to = "/pages/index.html"
+status = 301
+force = true
