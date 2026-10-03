@@ -22,6 +22,20 @@
       cursor: pointer;
     }
 
+    .nav-right .btn-primary {
+      background: transparent;
+      color: var(--baby-blue);
+      border: 1.5px solid var(--baby-blue);
+    }
+
+    .nav-right .btn-primary:hover {
+      background: transparent;
+      color: var(--white);
+      border-color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: none;
+    }
+
     .header-inner .mega-wrap .mega-item,
     .header-inner .mega-wrap .btn {
       pointer-events: auto;
