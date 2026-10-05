@@ -1,4 +1,4 @@
-
+﻿
     *,
     *::before,
     *::after {
@@ -375,7 +375,8 @@
     }
 
     .mega-item:hover .mega-item-icon {
-      background: var(--baby-blue);
+      background: var(--deep-blue);
+      color: #ffffff;
     }
 
     .mega-item:hover .mega-item-title {
