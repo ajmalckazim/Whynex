@@ -1,0 +1,224 @@
+﻿/* ================================================================
+   WHYNEX - Responsive Fixes & Optimization Layer
+   Enhances existing CSS without overriding brand identity
+   ================================================================ */
+
+/* â”€â”€ Global overflow prevention â”€â”€ */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* â”€â”€ Image optimization â”€â”€ */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* â”€â”€ intro-img: ensure images fill properly â”€â”€ */
+.intro-img, .sp-intro-img {
+  overflow: hidden;
+  position: relative;
+}
+.intro-img img, .sp-intro-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* â”€â”€ Reduce motion â”€â”€ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* â”€â”€ Font loading stability â”€â”€ */
+body {
+  font-display: swap;
+}
+
+/* â”€â”€ Hero section CLS prevention â”€â”€ */
+.hero-right canvas {
+  contain: layout;
+}
+
+/* â”€â”€ Navigation mobile enhancements â”€â”€ */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+  .mobile-nav {
+    max-height: 100dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Prevent mega-menu overflow */
+  .mega-wrap {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  /* Hero fixes */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .hero-right {
+    height: 260px;
+    order: -1;
+  }
+  /* Section padding on mobile */
+  .section-pad { padding: 64px 0; }
+  .section-pad-sm { padding: 48px 0; }
+  /* Intro grid */
+  .intro-grid { gap: 32px; }
+  .sp-intro-grid { gap: 32px; }
+  /* Hero page padding */
+  .ind-page-hero { padding: 140px 0 80px; }
+  .sp-hero { padding: 140px 0 80px; }
+  /* Footer grid */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px;
+  }
+  .footer-locations {
+    flex-direction: column;
+    gap: 24px;
+  }
+  /* Typography scale */
+  .sh h2 { font-size: clamp(1.5rem, 5vw, 2rem); }
+  .cta-headline { font-size: clamp(2.2rem, 8vw, 3.5rem) !important; }
+  .final-cta h2 { font-size: clamp(2rem, 7vw, 3rem); }
+  /* Button fix */
+  .btn { min-width: 0; white-space: normal; }
+  .hero-ctas, .cta-btns {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .hero-ctas .btn, .cta-btns .btn {
+    justify-content: center;
+    text-align: center;
+  }
+  /* Slider cards */
+  .cs-card { flex: 0 0 90%; }
+  .testi-card { flex: 0 0 92%; }
+  /* Cards grids */
+  .why-grid { grid-template-columns: 1fr; }
+  .ben-grid { grid-template-columns: 1fr; }
+  /* Services process grid */
+  .proc-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .proc-grid::before { display: none; }
+  /* FAQ */
+  .faq-q { font-size: 1rem; padding: 20px 0; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 14px; }
+  .hero-h1 { font-size: clamp(1.8rem, 7.5vw, 2.5rem); }
+  .sp-hero h1, .ind-page-hero h1 {
+    font-size: clamp(1.8rem, 7.5vw, 3rem);
+  }
+  .proc-grid { grid-template-columns: 1fr; }
+  .sol-grid { grid-template-columns: 1fr; }
+  .offer-grid { grid-template-columns: 1fr; }
+  .chal-grid { grid-template-columns: 1fr; }
+  .srv-grid { grid-template-columns: 1fr; }
+  .industries-grid { grid-template-columns: 1fr; }
+  .process-timeline { grid-template-columns: 1fr; }
+  .pf-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  /* Copyright fix */
+  .footer-copy { font-size: 13px; }
+  /* Breadcrumb wrap */
+  .breadcrumb { flex-wrap: wrap; justify-content: center; }
+}
+
+/* â”€â”€ Tablet (768px - 1024px) â”€â”€ */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container { padding: 0 24px; }
+  .mega-inner {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  .hero-grid {
+    gap: 40px;
+  }
+  .hero-h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
+  .proc-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .proc-grid::before { display: none; }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .ind-page-hero { padding: 160px 0 100px; }
+  .sp-hero { padding: 160px 0 100px; }
+}
+
+/* â”€â”€ Large screens â”€â”€ */
+@media (min-width: 1920px) {
+  .container { max-width: 1600px; }
+  html { font-size: 18px; }
+}
+@media (min-width: 2560px) {
+  .container { max-width: 2000px; }
+  html { font-size: 20px; }
+}
+
+/* â”€â”€ Sticky header visibility â”€â”€ */
+#header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+/* â”€â”€ Mega menu viewport constraint â”€â”€ */
+.mega-wrap {
+  left: 0 !important;
+  right: 0 !important;
+  width: 100vw !important;
+  box-sizing: border-box;
+}
+
+/* â”€â”€ Back to top accessibility â”€â”€ */
+#back-to-top:focus-visible {
+  outline: 2px solid var(--baby-blue);
+  outline-offset: 3px;
+}
+
+/* â”€â”€ Form accessibility â”€â”€ */
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+/* â”€â”€ Skip to main content (accessibility) â”€â”€ */
+.skip-to-main {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  background: var(--deep-blue);
+  color: white;
+  padding: 12px 24px;
+  z-index: 10000;
+  font-weight: 600;
+  transition: top 0.2s;
+}
+.skip-to-main:focus {
+  top: 0;
+}
+
+/* â”€â”€ Print optimization â”€â”€ */
+@media print {
+  #header, #back-to-top, .hamburger, .mobile-nav, #particles-canvas { display: none !important; }
+  body { color: #000; }
+}

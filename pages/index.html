@@ -8,17 +8,21 @@
   <meta name="description"
     content="WHYNEX helps businesses in Qatar, the UAE, and India grow through web development, mobile apps, digital marketing, SEO, branding, and user experience design.">
   <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://whynex.com/">
   <link rel="icon" type="image/png" href="../images/whynex-logo.png">
 
 <!-- Open Graph -->
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://whynex.com/">
   <meta property="og:title" content="WHYNEX | Digital Marketing &amp; Technology Agency">
   <meta property="og:description"
     content="WHYNEX helps businesses in Qatar, the UAE, and India grow through web development, mobile apps, digital marketing, SEO, branding, and user experience design.">
+  <meta property="og:image" content="https://whynex.com/images/whynex-logo1.png">
 <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="WHYNEX | Digital Marketing &amp; Technology Agency">
   <meta name="twitter:description" content="WHYNEX helps businesses in Qatar, the UAE, and India grow through web development, mobile apps, digital marketing, SEO, branding, and user experience design.">
+  <meta name="twitter:image" content="https://whynex.com/images/whynex-logo1.png">
 <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,9 +49,11 @@
   </script>
   <link rel="stylesheet" href="../css/home.css">
   <link rel="stylesheet" href="../css/navigation.css">
+  <link rel="stylesheet" href="../css/responsive-fixes.css">
 </head>
 
 <body>
+<a href="#header" class="skip-to-main">Skip to main content</a>
 
 <!-- ═══════════════════ HEADER ═══════════════════ -->
   <header id="header">
@@ -304,7 +310,7 @@
 
 <!-- Logo -->
         <a href="#hero" class="logo" aria-label="WHYNEX Home">
-          <img src="../images/whynex-logo.png" alt="WHYNEX" class="logo-img" width="1033" height="168">
+          <img loading="eager" loading="eager" src="../images/whynex-logo.png" alt="WHYNEX" class="logo-img" width="1033" height="168">
         </a>
 
 <!-- Right nav -->
@@ -462,6 +468,7 @@
       </nav>
     </div>
   </header>
+<main id="main" role="main">
 
 <!-- Mobile Nav -->
   <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
@@ -558,7 +565,7 @@
 
 <!-- CLICK-TO-OPEN MEGA MENU -->
 
-<script src="../js/navigation.js"></script>
+
 
 <!-- ═══════════════════ HERO ═══════════════════ -->
   <section id="hero" aria-label="Hero section">
@@ -591,7 +598,7 @@
         </div>
 
         <div class="hero-right" aria-hidden="true">
-          <img class="hero-static-image" src="../images/hero-static.webp" alt="">
+          <img loading="eager" loading="eager" class="hero-static-image" src="../images/hero-static.webp" alt="">
         </div>
       </div>
     </div>
@@ -1506,12 +1513,13 @@
   </section>
 
 <!-- ═══════════════════ FOOTER ═══════════════════ -->
-  <footer id="footer">
+  </main>
+<footer id="footer">
     <div class="footer-top">
       <div class="container footer-layout">
         <div class="footer-brand">
           <a href="index.html" class="footer-brand-logo" aria-label="WHYNEX Home">
-            <img src="../images/footter.png" alt="WHYNEX" width="1033" height="168">
+            <img loading="lazy" src="../images/footter.png" alt="WHYNEX" width="1033" height="168">
           </a>
           <h3 class="footer-brand-heading">Food for thought</h3>
           <p class="footer-brand-copy">Get truth digital insights and advice from WHYNEX experts and consultants—straight to your inbox.</p>
@@ -1557,10 +1565,10 @@
             <div class="footer-column">
               <div class="footer-col-title">Learn More</div>
               <ul class="footer-links-list">
-                <li><a href="services/mobile-app-development.html">Mobile App Development</a></li>
+                <li><a href="services/mobile-application.html">Mobile App Development</a></li>
                 <li><a href="services/web-development.html">Web Development</a></li>
-                <li><a href="services/seo.html">Search Engine Optimization</a></li>
-                <li><a href="services/digital-marketing.html">Digital Marketing</a></li>
+                <li><a href="services/search-engine-optimization.html">Search Engine Optimization</a></li>
+                <li><a href="services/content-marketing.html">Digital Marketing</a></li>
                 <li><a href="services/ui-ux-design.html">UI/UX Design</a></li>
               </ul>
             </div>
@@ -1605,7 +1613,7 @@
     </div>
   </footer>
 
-<script src="../js/home.js"></script>
+<script defer src="../js/main-opt.js"></script>
 
 <!-- Back to Top -->
   <button type="button" id="back-to-top" aria-label="Back to top">
@@ -1614,7 +1622,7 @@
     </svg>
   </button>
 
-<script src="../js/back-to-top.js"></script>
+
 </body>
 
 </html>
