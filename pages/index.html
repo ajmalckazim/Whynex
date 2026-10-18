@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,17 +8,21 @@
   <meta name="description"
     content="WHYNEX helps businesses in Qatar, the UAE, and India grow through web development, mobile apps, digital marketing, SEO, branding, and user experience design.">
   <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://whynex.com/">
   <link rel="icon" type="image/png" href="../images/whynex-logo.png">
 
 <!-- Open Graph -->
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://whynex.com/">
   <meta property="og:title" content="WHYNEX | Digital Marketing &amp; Technology Agency">
   <meta property="og:description"
     content="WHYNEX helps businesses in Qatar, the UAE, and India grow through web development, mobile apps, digital marketing, SEO, branding, and user experience design.">
+  <meta property="og:image" content="https://whynex.com/images/whynex-logo1.png">
 <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="WHYNEX | Digital Marketing &amp; Technology Agency">
   <meta name="twitter:description" content="WHYNEX helps businesses in Qatar, the UAE, and India grow through web development, mobile apps, digital marketing, SEO, branding, and user experience design.">
+  <meta name="twitter:image" content="https://whynex.com/images/whynex-logo1.png">
 <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,13 +47,65 @@
     ]
   }
   </script>
+  <link rel="preload" as="image" href="../images/hero-static.webp">
   <link rel="stylesheet" href="../css/home.css">
   <link rel="stylesheet" href="../css/navigation.css">
+  <link rel="stylesheet" href="../css/responsive-fixes.css">
+  <link rel="stylesheet" href="../css/antigravity-intro.css">
+  <script>
+    (function() {
+      try {
+        var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var hasViewed = sessionStorage.getItem('whynex_intro_viewed') === 'true';
+        var isForce = new URLSearchParams(window.location.search).get('intro') === 'true';
+        if (!prefersReduced && (!hasViewed || isForce)) {
+          document.documentElement.classList.add('whynex-intro-active');
+        }
+      } catch(e) {}
+    })();
+  </script>
 </head>
 
 <body>
+  <!-- ================= ANTIGRAVITY CINEMATIC INTRO ================= -->
+  <div id="antigravity-intro" class="antigravity-intro" aria-hidden="true">
+    <div class="intro-bg-layer"></div>
+    <div class="intro-grid-pattern" aria-hidden="true"></div>
+    <div class="intro-ambient-nebula intro-nebula-1" aria-hidden="true"></div>
+    <div class="intro-ambient-nebula intro-nebula-2" aria-hidden="true"></div>
+    <canvas id="intro-canvas" class="intro-canvas" aria-hidden="true"></canvas>
+    
+    <div class="intro-shockwave" id="intro-shockwave" aria-hidden="true"></div>
+    
+    <div class="intro-stage" id="intro-stage">
+      <div class="intro-image-glow" id="intro-image-glow" aria-hidden="true"></div>
+      <div class="intro-image-wrapper" id="intro-image-wrapper">
+        <img id="intro-hero-img" class="intro-hero-img" src="../images/hero-static.webp" alt="WHYNEX Digital Experiences" draggable="false">
+      </div>
+    </div>
 
-<!-- ═══════════════════ HEADER ═══════════════════ -->
+    <div class="intro-branding" id="intro-branding" aria-hidden="true">
+      <div class="intro-brand-logo">
+        <img src="../images/whynex-logo1.png" alt="WHYNEX" class="intro-logo-img">
+      </div>
+      <div class="intro-tagline">
+        <span class="intro-tagline-text">FLOWING WITH THE FUTURE</span>
+        <div class="intro-progress-bar"><div class="intro-progress-fill"></div></div>
+      </div>
+    </div>
+
+    <button type="button" id="intro-skip-btn" class="intro-skip-btn" aria-label="Skip Intro Animation">
+      <span>Skip</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="5 4 15 12 5 20 5 4"></polygon>
+        <line x1="19" y1="5" x2="19" y2="19"></line>
+      </svg>
+    </button>
+  </div>
+
+<a href="#header" class="skip-to-main">Skip to main content</a>
+
+<!-- ------------------- HEADER ------------------- -->
   <header id="header">
     <div class="container">
       <nav class="header-inner" aria-label="Main navigation">
@@ -304,7 +360,7 @@
 
 <!-- Logo -->
         <a href="#hero" class="logo" aria-label="WHYNEX Home">
-          <img src="../images/whynex-logo.png" alt="WHYNEX" class="logo-img" width="1033" height="168">
+          <img loading="eager" loading="eager" src="../images/whynex-logo.png" alt="WHYNEX" class="logo-img" width="1033" height="168">
         </a>
 
 <!-- Right nav -->
@@ -418,7 +474,7 @@
                       <div style="font-size:13px; color:rgba(255,255,255,0.7); line-height:1.8; margin-bottom:20px;">
                         Have an idea? Let's transform it into a powerful digital experience.</div>
                       <a href="contact.html" class="btn btn-primary" style="font-size:12px; padding:10px 22px;">Start a
-                        Project →</a>
+                        Project ?</a>
                     </div>
                   </div>
                 </div>
@@ -462,6 +518,7 @@
       </nav>
     </div>
   </header>
+<main id="main" role="main">
 
 <!-- Mobile Nav -->
   <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
@@ -558,9 +615,9 @@
 
 <!-- CLICK-TO-OPEN MEGA MENU -->
 
-<script src="../js/navigation.js"></script>
 
-<!-- ═══════════════════ HERO ═══════════════════ -->
+
+<!-- ------------------- HERO ------------------- -->
   <section id="hero" aria-label="Hero section">
     <div class="hero-canvas">
       <div class="blob blob-1"></div>
@@ -591,7 +648,7 @@
         </div>
 
         <div class="hero-right" aria-hidden="true">
-          <img class="hero-static-image" src="../images/hero-static.webp" alt="">
+          <img loading="eager" class="hero-static-image" src="../images/hero-static.webp" alt="WHYNEX Hero Illustration">
         </div>
       </div>
     </div>
@@ -609,7 +666,7 @@
     </div>
   </section>
 
-<!-- ═══════════════════ STATS ═══════════════════ -->
+<!-- ------------------- STATS ------------------- -->
   <section id="stats" aria-label="Company statistics">
     <div class="container">
       <div class="stats-grid">
@@ -633,7 +690,7 @@
     </div>
   </section>
 
-<!-- ═══════════════════ ABOUT ═══════════════════ -->
+<!-- ------------------- ABOUT ------------------- -->
   <section id="about" class="section-pad" aria-label="About WHYNEX">
     <div class="container">
       <div class="about-grid">
@@ -683,7 +740,7 @@
     </div>
   </section>
 
-<!-- ═══════════════════ SERVICES ═══════════════════ -->
+<!-- ------------------- SERVICES ------------------- -->
   <section id="services" class="section-pad" aria-label="Our services">
     <div class="container">
       <div class="sh reveal">
@@ -783,7 +840,7 @@
     </div>
   </section>
 
-<!-- ═══════════════════ CASE STUDIES ═══════════════════ -->
+<!-- ------------------- CASE STUDIES ------------------- -->
   <section id="case-studies" class="section-pad" aria-label="Case studies">
     <div class="container">
       <div class="sh reveal">
@@ -796,7 +853,7 @@
 
           <li class="cs-card">
             <div class="cs-img">
-              <div class="cs-img-bg" style="background: linear-gradient(135deg,#0d1f3c,#1769AA);">
+              <div class="cs-img-bg" style="background: linear-gradient(135deg,#0d1f3c,#2A4D77);">
                 <div class="cs-img-pattern"></div>
                 <div class="cs-num-big" aria-hidden="true">01</div>
                 <div class="cs-img-overlay"></div>
@@ -953,7 +1010,7 @@
     </div>
   </section>
 
-<!-- ═══════════════════ INDUSTRIES ═══════════════════ -->
+<!-- ------------------- INDUSTRIES ------------------- -->
   <section id="industries" class="section-pad" aria-label="Industries we serve">
     <div class="container">
       <div class="sh reveal">
@@ -1094,7 +1151,7 @@
     </div>
   </section>
 
-<!-- ═══════════════════ PROCESS ═══════════════════ -->
+<!-- ------------------- PROCESS ------------------- -->
   <section id="process" class="section-pad" aria-label="Our process">
     <div class="container">
       <div class="sh reveal" style="text-align:center;">
@@ -1149,7 +1206,7 @@
     </div>
   </section>
 
-<!-- ═══════════════════ PORTFOLIO ═══════════════════ -->
+<!-- ------------------- PORTFOLIO ------------------- -->
   <section id="portfolio" class="section-pad" aria-label="Portfolio">
     <div class="container">
       <div class="sh reveal">
@@ -1167,7 +1224,7 @@
       <div class="pf-grid" id="pf-grid">
         <div class="pf-card" data-cat="web">
           <div class="pf-img">
-            <div class="pf-img-bg" style="background:linear-gradient(135deg,#0d1f3c,#1769AA);">
+            <div class="pf-img-bg" style="background:linear-gradient(135deg,#0d1f3c,#2A4D77);">
               <div style="font-size:48px;font-weight:900;color:rgba(255,255,255,0.08);user-select:none;">WEB</div>
             </div>
             <div class="pf-overlay" aria-hidden="true">
@@ -1271,7 +1328,7 @@
     </div>
   </section>
 
-<!-- ═══════════════════ WHY US ═══════════════════ -->
+<!-- ------------------- WHY US ------------------- -->
   <section id="why-us" class="section-pad" aria-label="Why choose WHYNEX">
     <div class="container">
       <div class="sh reveal" style="text-align:center; max-width:600px; margin: 0 auto 64px;">
@@ -1345,7 +1402,7 @@
     </div>
   </section>
 
-<!-- ═══════════════════ TESTIMONIALS ═══════════════════ -->
+<!-- ------------------- TESTIMONIALS ------------------- -->
   <section id="testimonials" class="section-pad" aria-label="Client feedback">
     <div class="container">
       <div class="sh reveal" style="text-align:center;">
@@ -1360,7 +1417,7 @@
     </div>
   </section>
 
-<!-- ═══════════════════ CTA ═══════════════════ -->
+<!-- ------------------- CTA ------------------- -->
   <section id="cta" aria-label="Call to action">
     <div class="cta-blob-1" aria-hidden="true"></div>
     <div class="cta-blob-2" aria-hidden="true"></div>
@@ -1383,7 +1440,7 @@
     </div>
   </section>
 
-<!-- ═══════════════════ CONTACT ═══════════════════ -->
+<!-- ------------------- CONTACT ------------------- -->
   <section id="contact" class="section-pad" aria-label="Contact WHYNEX">
     <div class="container">
       <div class="contact-grid">
@@ -1505,13 +1562,14 @@
     </div>
   </section>
 
-<!-- ═══════════════════ FOOTER ═══════════════════ -->
-  <footer id="footer">
+<!-- ------------------- FOOTER ------------------- -->
+  </main>
+<footer id="footer">
     <div class="footer-top">
       <div class="container footer-layout">
         <div class="footer-brand">
           <a href="index.html" class="footer-brand-logo" aria-label="WHYNEX Home">
-            <img src="../images/footter.png" alt="WHYNEX" width="1033" height="168">
+            <img loading="lazy" src="../images/footter.png" alt="WHYNEX" width="1033" height="168">
           </a>
           <h3 class="footer-brand-heading">Food for thought</h3>
           <p class="footer-brand-copy">Get truth digital insights and advice from WHYNEX experts and consultants—straight to your inbox.</p>
@@ -1557,10 +1615,10 @@
             <div class="footer-column">
               <div class="footer-col-title">Learn More</div>
               <ul class="footer-links-list">
-                <li><a href="services/mobile-app-development.html">Mobile App Development</a></li>
+                <li><a href="services/mobile-application.html">Mobile App Development</a></li>
                 <li><a href="services/web-development.html">Web Development</a></li>
-                <li><a href="services/seo.html">Search Engine Optimization</a></li>
-                <li><a href="services/digital-marketing.html">Digital Marketing</a></li>
+                <li><a href="services/search-engine-optimization.html">Search Engine Optimization</a></li>
+                <li><a href="services/content-marketing.html">Digital Marketing</a></li>
                 <li><a href="services/ui-ux-design.html">UI/UX Design</a></li>
               </ul>
             </div>
@@ -1605,7 +1663,8 @@
     </div>
   </footer>
 
-<script src="../js/home.js"></script>
+<script defer src="../js/main-opt.js"></script>
+<script defer src="../js/antigravity-intro.js"></script>
 
 <!-- Back to Top -->
   <button type="button" id="back-to-top" aria-label="Back to top">
@@ -1614,7 +1673,7 @@
     </svg>
   </button>
 
-<script src="../js/back-to-top.js"></script>
+
 </body>
 
 </html>

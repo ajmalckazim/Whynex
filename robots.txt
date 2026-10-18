@@ -1,0 +1,8 @@
+﻿User-agent: *
+Allow: /
+
+# Block scratch/temp files
+Disallow: /scratch/
+Disallow: /.agents/
+
+Sitemap: https://whynex.com/sitemap.xml

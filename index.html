@@ -6,6 +6,11 @@
   <meta http-equiv="refresh" content="0; url=./pages/index.html">
   <link rel="icon" type="image/png" href="./images/whynex-logo.png">
   <title>WHYNEX</title>
+  <script>
+    if (window.location.search || window.location.hash) {
+      window.location.replace('./pages/index.html' + window.location.search + window.location.hash);
+    }
+  </script>
 </head>
 <body>
   <p><a href="./pages/index.html">Continue to WHYNEX</a></p>

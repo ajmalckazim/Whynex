@@ -1,0 +1,543 @@
+/* ==========================================================================
+   WHYNEX - CINEMATIC ANTIGRAVITY INTRO LOADING ANIMATION
+   ========================================================================== */
+
+:root {
+  --intro-bg: #070A0F;
+  --intro-bg-gradient: radial-gradient(ellipse at 50% 48%, #0d1728 0%, #070b13 55%, #030508 100%);
+  --intro-baby-blue: #7490C8;
+  --intro-deep-blue: #2A4D77;
+  --intro-cyan-glow: #64b5f6;
+  --intro-easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --intro-float-easing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+/* Prevent scroll during intro when active */
+html.whynex-intro-active,
+html.whynex-intro-active body {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+
+/* Homepage initial state while intro is active */
+html.whynex-intro-active #header {
+  opacity: 0;
+  transform: translateY(-24px);
+  pointer-events: none;
+  transition: opacity 0.9s var(--intro-easing), transform 0.9s var(--intro-easing);
+}
+
+html.whynex-intro-active #hero .hero-left {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s var(--intro-easing), transform 0.9s var(--intro-easing);
+}
+
+html.whynex-intro-active #hero .hero-static-image {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+html.whynex-intro-active #hero .hero-scroll {
+  opacity: 0;
+  transform: translate(-50%, 15px);
+  transition: opacity 0.8s var(--intro-easing), transform 0.8s var(--intro-easing);
+}
+
+html.whynex-intro-active .hero-canvas {
+  opacity: 0.3;
+  transition: opacity 1.2s ease;
+}
+
+/* Homepage content revealing state */
+html.whynex-intro-revealing #header {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+html.whynex-intro-revealing #hero .hero-left {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html.whynex-intro-revealing #hero .hero-scroll {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+html.whynex-intro-revealing .hero-canvas {
+  opacity: 1;
+}
+
+/* When intro is not active or finished, intro element is completely hidden */
+html:not(.whynex-intro-active) #antigravity-intro {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+/* ==========================================================================
+   INTRO FULLSCREEN OVERLAY
+   ========================================================================== */
+
+#antigravity-intro {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  background-color: var(--intro-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  contain: strict;
+  transition: opacity 0.75s var(--intro-easing), visibility 0.75s;
+}
+
+#antigravity-intro.intro-fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Deep Space Background Atmosphere */
+.intro-bg-layer {
+  position: absolute;
+  inset: 0;
+  background: var(--intro-bg-gradient);
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.85s ease;
+}
+
+/* Futuristic Grid Lines */
+.intro-grid-pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(to right, rgba(116, 144, 200, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(116, 144, 200, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at 50% 50%, black 35%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 35%, transparent 75%);
+  opacity: 0.75;
+}
+
+/* Ambient Nebula Glowing Orbs */
+.intro-ambient-nebula {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+  filter: blur(85px);
+  opacity: 0.45;
+  animation: nebulaPulse 9s ease-in-out infinite alternate;
+}
+
+.intro-nebula-1 {
+  width: 580px;
+  height: 580px;
+  top: 15%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(42, 77, 119, 0.5) 0%, rgba(23, 105, 170, 0.25) 50%, transparent 75%);
+}
+
+.intro-nebula-2 {
+  width: 500px;
+  height: 500px;
+  bottom: 10%;
+  left: 20%;
+  background: radial-gradient(circle, rgba(116, 144, 200, 0.38) 0%, rgba(100, 181, 246, 0.18) 50%, transparent 75%);
+  animation-delay: -4.5s;
+}
+
+@keyframes nebulaPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.92);
+    opacity: 0.35;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.18);
+    opacity: 0.6;
+  }
+}
+
+/* Particles Canvas */
+.intro-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   IMAGE STAGE & FLOATING ANTI-GRAVITY CONTAINER
+   ========================================================================== */
+
+.intro-stage {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(520px, 86vw);
+  height: min(520px, 58vh);
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+/* Image Aura (Atmospheric back-glow) */
+.intro-image-glow {
+  position: absolute;
+  width: 125%;
+  height: 125%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(116, 144, 200, 0.45) 0%, rgba(42, 77, 119, 0.28) 45%, transparent 72%);
+  filter: blur(40px);
+  opacity: 0;
+  transform: scale(0.5);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.intro-image-glow.glow-active {
+  opacity: 0.9;
+  transform: scale(1);
+  animation: glowBreathe 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes glowBreathe {
+  0% {
+    opacity: 0.75;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.1);
+    filter: blur(48px);
+  }
+}
+
+/* Moving Image Wrapper */
+.intro-image-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+  transform-style: preserve-3d;
+  will-change: transform, filter, opacity;
+  opacity: 0;
+}
+
+.intro-image-wrapper.descending,
+.intro-image-wrapper.floating {
+  opacity: 1;
+}
+
+/* The actual existing Hero Image inside intro */
+.intro-hero-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 25px rgba(116, 144, 200, 0.35));
+  will-change: transform;
+}
+
+/* Initial Descent State */
+.intro-image-wrapper.descending {
+  animation: antigravityEntrance 1.25s var(--intro-easing) forwards;
+}
+
+/* Active Floating State */
+.intro-image-wrapper.floating {
+  animation: antigravityLevitate 5.5s var(--intro-float-easing) infinite;
+}
+
+/* 1. Cinematic Dramatic Entrance Keyframes */
+@keyframes antigravityEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -115vh, 0) scale(0.6) rotateX(26deg) rotateY(-8deg);
+    filter: blur(16px) brightness(1.4);
+  }
+  20% {
+    opacity: 1;
+  }
+  75% {
+    transform: translate3d(0, 16px, 0) scale(1.035) rotateX(-2deg) rotateY(1deg);
+    filter: blur(1.5px) brightness(1.15);
+  }
+  88% {
+    transform: translate3d(0, -8px, 0) scale(0.985) rotateX(1deg) rotateY(-0.5deg);
+    filter: blur(0px) brightness(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotateX(0deg) rotateY(0deg);
+    filter: blur(0px) brightness(1);
+  }
+}
+
+/* 2. Weightless Anti-Gravity Floating Keyframes */
+@keyframes antigravityLevitate {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate3d(5px, -14px, 0) rotate(1deg) scale(1.02);
+  }
+  50% {
+    transform: translate3d(-4px, 6px, 0) rotate(-0.8deg) scale(0.995);
+  }
+  75% {
+    transform: translate3d(6px, -9px, 0) rotate(0.6deg) scale(1.012);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+}
+
+/* ==========================================================================
+   CINEMATIC SHOCKWAVE EFFECT
+   ========================================================================== */
+
+.intro-shockwave {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  border: 2px solid rgba(116, 144, 200, 0.9);
+  box-shadow: 
+    0 0 45px rgba(116, 144, 200, 0.8),
+    inset 0 0 30px rgba(100, 181, 246, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.intro-shockwave.trigger {
+  animation: shockwaveRipple 1.15s cubic-bezier(0.1, 0.75, 0.25, 1) forwards;
+}
+
+@keyframes shockwaveRipple {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.25);
+    border-width: 3.5px;
+  }
+  40% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(19);
+    border-width: 1px;
+  }
+}
+
+/* ==========================================================================
+   MINIMALIST BRANDING & STATUS
+   ========================================================================== */
+
+.intro-branding {
+  position: absolute;
+  bottom: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.intro-branding.visible {
+  opacity: 1;
+}
+
+.intro-brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-logo-img {
+  height: 26px;
+  width: auto;
+  opacity: 0.95;
+  filter: drop-shadow(0 0 14px rgba(116, 144, 200, 0.5));
+}
+
+.intro-tagline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.intro-tagline-text {
+  font-family: var(--font, 'Poppins', sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3.5px;
+  color: var(--intro-baby-blue);
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.intro-progress-bar {
+  width: 120px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.intro-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--intro-deep-blue), var(--intro-baby-blue), #ffffff);
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--intro-baby-blue);
+  transition: width 2.4s cubic-bezier(0.2, 0.8, 0.25, 1);
+}
+
+/* ==========================================================================
+   SKIP INTRO BUTTON
+   ========================================================================== */
+
+.intro-skip-btn {
+  position: absolute;
+  top: 28px;
+  right: 32px;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  font-family: var(--font, 'Poppins', sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 30px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.25s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-skip-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.intro-skip-btn:hover {
+  background: rgba(116, 144, 200, 0.2);
+  border-color: rgba(116, 144, 200, 0.55);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 0 15px rgba(116, 144, 200, 0.3);
+}
+
+.intro-skip-btn:focus-visible {
+  box-shadow: 0 0 0 2px var(--intro-baby-blue);
+}
+
+.intro-skip-btn svg {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.25s ease;
+}
+
+.intro-skip-btn:hover svg {
+  transform: translateX(2px);
+}
+
+/* ==========================================================================
+   RESPONSIVENESS & ACCESSIBILITY
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .intro-stage {
+    width: min(340px, 82vw);
+    height: min(340px, 45vh);
+  }
+
+  .intro-skip-btn {
+    top: 20px;
+    right: 20px;
+    padding: 6px 14px;
+    font-size: 10px;
+  }
+
+  .intro-branding {
+    bottom: 30px;
+  }
+
+  .intro-tagline-text {
+    font-size: 9.5px;
+    letter-spacing: 2.5px;
+  }
+
+  .intro-progress-bar {
+    width: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-stage {
+    width: min(300px, 86vw);
+    height: min(300px, 42vh);
+  }
+}
+
+/* Reduced Motion Preference - Clean Instant Access */
+@media (prefers-reduced-motion: reduce) {
+  #antigravity-intro {
+    display: none !important;
+  }
+
+  html.whynex-intro-active,
+  html.whynex-intro-active body {
+    overflow: auto !important;
+    height: auto !important;
+  }
+
+  html.whynex-intro-active #header,
+  html.whynex-intro-active #hero .hero-left,
+  html.whynex-intro-active #hero .hero-static-image,
+  html.whynex-intro-active #hero .hero-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+  }
+}

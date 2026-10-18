@@ -1,50 +1,100 @@
+/* ==========================================================================
+   WHYNEX - NAVIGATION & SMART HIDE/REVEAL HEADER SYSTEM
+   ========================================================================== */
 
-    /* Disable hover-only opening and make the dropdown click controlled */
-    .header-inner .nav-item .mega-wrap {
-      display: none !important;
-      visibility: hidden !important;
-      opacity: 0 !important;
-      pointer-events: none !important;
-    }
+/* ── Smart Hide & Reveal Header on Scroll ── */
+#header {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  transform: translateY(0);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background var(--transition, 0.35s ease),
+              box-shadow var(--transition, 0.35s ease),
+              backdrop-filter var(--transition, 0.35s ease);
+  will-change: transform;
+}
 
-    .header-inner .nav-item.menu-open>.mega-wrap {
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      pointer-events: auto !important;
-    }
+/* Hidden state: slide smoothly upward out of the viewport */
+#header.header-hidden {
+  transform: translateY(-100%) !important;
+}
 
-    .header-inner .nav-item.menu-open>.nav-link svg {
-      transform: rotate(180deg);
-    }
+/* Revealed state: slide smoothly downward into view */
+#header.header-visible {
+  transform: translateY(0) !important;
+}
 
-    .header-inner .nav-link.has-mega {
-      cursor: pointer;
-    }
+/* Scrolled state: dark glassmorphism styling */
+#header.scrolled {
+  background: rgba(11, 15, 21, 0.95);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
 
-    .nav-right .btn-primary {
-      background: transparent;
-      color: var(--baby-blue);
-      border: 1.5px solid var(--baby-blue);
-    }
+/* Keep header visible if focused via keyboard tab navigation */
+#header:focus-within {
+  transform: translateY(0) !important;
+}
 
-    .nav-right .btn-primary:hover {
-      background: transparent;
-      color: var(--white);
-      border-color: var(--white);
-      transform: translateY(-2px);
-      box-shadow: none;
-    }
+/* Disable hover-only opening and make the dropdown click controlled */
+.header-inner .nav-item .mega-wrap {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  top: 100%;
+}
 
-    .header-inner .mega-wrap .mega-item,
-    .header-inner .mega-wrap .btn {
-      pointer-events: auto;
-    }
+.header-inner .nav-item.menu-open>.mega-wrap {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
 
-    @media (max-width: 991px) {
-      .header-inner .nav-item .mega-wrap {
-        position: static !important;
-        width: 100% !important;
-      }
-    }
-  
+.header-inner .nav-item.menu-open>.nav-link svg {
+  transform: rotate(180deg);
+}
+
+.header-inner .nav-link.has-mega {
+  cursor: pointer;
+}
+
+.nav-right .btn-primary {
+  background: transparent;
+  color: var(--baby-blue);
+  border: 1.5px solid var(--baby-blue);
+}
+
+.nav-right .btn-primary:hover {
+  background: transparent;
+  color: var(--white);
+  border-color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+.header-inner .mega-wrap .mega-item,
+.header-inner .mega-wrap .btn {
+  pointer-events: auto;
+}
+
+@media (max-width: 991px) {
+  .header-inner .nav-item .mega-wrap {
+    position: static !important;
+    width: 100% !important;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  #header {
+    transition: background var(--transition, 0.35s ease),
+                box-shadow var(--transition, 0.35s ease) !important;
+  }
+}

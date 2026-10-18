@@ -1,15 +1,75 @@
 'use strict';
 
-    /* ── Header scroll ── */
+    /* ── Shared Header & Nav References ── */
     const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
-
-    /* ── Hamburger / mobile nav ── */
     const hamburger = document.getElementById('hamburger');
     const mobileNav = document.getElementById('mobile-nav');
-    hamburger.setAttribute('aria-controls', mobileNav.id);
+
+    /* ── Smart Hide & Reveal Header on Scroll ── */
+    if (header) {
+      let lastScrollY = Math.max(0, window.pageYOffset || document.documentElement.scrollTop);
+      let ticking = false;
+      const scrollThreshold = 10;
+      const topZone = 50;
+
+      function isNavOpen() {
+        const isMegaOpen = document.querySelector('.header-inner .nav-item.menu-open') !== null;
+        const isMobileOpen = (mobileNav && mobileNav.classList.contains('open')) ||
+                             (hamburger && hamburger.classList.contains('open'));
+        const isFocused = header.contains(document.activeElement);
+        return isMegaOpen || isMobileOpen || isFocused;
+      }
+
+      function updateHeaderOnScroll() {
+        if (document.documentElement.classList.contains('whynex-intro-active') &&
+            !document.documentElement.classList.contains('whynex-intro-revealing')) {
+          ticking = false;
+          return;
+        }
+
+        const currentScrollY = Math.max(0, window.pageYOffset || document.documentElement.scrollTop);
+        const scrollDelta = currentScrollY - lastScrollY;
+
+        header.classList.toggle('scrolled', currentScrollY > topZone);
+
+        if (isNavOpen()) {
+          header.classList.remove('header-hidden');
+          header.classList.add('header-visible');
+          lastScrollY = currentScrollY;
+          ticking = false;
+          return;
+        }
+
+        if (currentScrollY <= topZone) {
+          header.classList.remove('header-hidden');
+          header.classList.add('header-visible');
+          lastScrollY = currentScrollY;
+        } else if (scrollDelta > scrollThreshold) {
+          header.classList.add('header-hidden');
+          header.classList.remove('header-visible');
+          lastScrollY = currentScrollY;
+        } else if (scrollDelta < -scrollThreshold) {
+          header.classList.remove('header-hidden');
+          header.classList.add('header-visible');
+          lastScrollY = currentScrollY;
+        }
+
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateHeaderOnScroll);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      updateHeaderOnScroll();
+    }
+
+    /* ── Hamburger / mobile nav ── */
+    if (hamburger && mobileNav) {
+      hamburger.setAttribute('aria-controls', mobileNav.id);
 
     function closeMobileNav() {
       hamburger.classList.remove('open');
