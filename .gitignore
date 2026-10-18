@@ -1,0 +1,14 @@
+# Archives
+*.rar
+*.zip
+*.tar.gz
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editor / Agent
+.gemini/
+.vscode/
+node_modules/
