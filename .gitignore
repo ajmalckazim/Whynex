@@ -1,6 +1,26 @@
 node_modules/
-.DS_Store
+# Archives and backups
+*.rar
+*.zip
+*.tar.gz
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# OS files
+Desktop.ini
 Thumbs.db
+.DS_Store
+
+# Editor / agent files
+.gemini/
 *.log
 .vscode/
 .idea/
+node_modules/
