@@ -62,7 +62,7 @@ html = html.replace(
   `<section class="solutions-banner" aria-labelledby="solutions-banner-title">
     <div class="solutions-banner-content">
       <h2 id="solutions-banner-title">Pixbit Solutions</h2>
-      <p>- Where Pixel Meets Bit -</p>
+      <p>- Flowing with the Future -</p>
     </div>
   </section>`
 );
@@ -93,7 +93,7 @@ html = html.replace(
   /<div class="about-text reveal">[\s\S]*?<\/div>\s*<div class="about-visual/s,
   `<div class="about-text reveal">
           <div class="eyebrow">About Pixbit Solutions</div>
-          <h2>WHERE PIXEL<br>MEETS BIT</h2>
+          <h2>FLOWING WITH<br>THE FUTURE</h2>
           <p>Founded in 2014, Pixbit Solutions draws its name from the two fundamental building blocks of design and technology—the pixel and the bit. This philosophy defines our commitment: delivering top-quality, detail-oriented digital experiences by blending striking UI/UX design with flawless software execution.</p>
           <p>With operational headquarters in Dubai Silicon Oasis (UAE) and Govt. Cyberpark, Kozhikode (India), we partner with enterprises and fast-growing brands across the Middle East, India, and internationally to engineer transformative digital products.</p>
           <div class="about-tags">
